@@ -2,6 +2,10 @@ package com.learn.zohky.expensemanager.Activities;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.icu.util.Calendar;
+import android.os.Build;
+import android.provider.CalendarContract;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -216,6 +220,9 @@ public class ExpenseSubmitActivity extends AppCompatActivity implements TextWatc
         Intent intent = new Intent(this, ExpenseSummaryActivity.class);
         intent.putExtra("insertedDate", selectedDate);
         startActivity(intent);
+        if(((CheckBox)findViewById(R.id.cbToCalendar)).isChecked()){
+            addEvent(categoryDAO.getName(), desc, note, amount, base, selectedDate);
+        }
     }
 
     @Override
@@ -269,6 +276,27 @@ public class ExpenseSubmitActivity extends AppCompatActivity implements TextWatc
                 onResume();
             }
         });
+    }
+
+    public void addEvent(String title, String desc, String note, float amount, String base, Date selectedDate){
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setData(CalendarContract.Events.CONTENT_URI);
+        intent.putExtra(CalendarContract.Events.TITLE, title + " - " + desc);
+        intent.putExtra(CalendarContract.Events.DESCRIPTION, note + "\n" + amount + " " + base);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, toCalendar(selectedDate).getTimeInMillis());
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, toCalendar(selectedDate).getTimeInMillis() + 5*60*1000);
+        }
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static Calendar toCalendar(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
     }
 }
 

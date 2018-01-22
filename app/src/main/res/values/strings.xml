@@ -33,4 +33,5 @@
     <string name="select">Select</string>
     <string name="enter_new_password">New Password</string>
     <string name="enter_new_password_again">New Password again</string>
+    <string name="save_to_calendar">Save to calendar</string>
 </resources>

@@ -11,20 +11,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.LoginActivity" android:excludeFromRecents="true">
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ExpenseSubmitActivity" android:label="Expense Submit"
+        <activity
+            android:name=".Activities.ExpenseSubmitActivity"
+            android:label="Expense Submit"
             android:launchMode="singleTask"/>
-        <activity android:name=".Activities.ExpenseSummaryActivity" android:label="Monthly summary"
+        <activity
+            android:name=".Activities.ExpenseSummaryActivity"
+            android:label="Monthly summary"
             android:launchMode="singleTask"/>
-        <activity android:name=".Activities.ExpenseReportActivity" android:label="Total expense report"
+        <activity
+            android:name=".Activities.ExpenseReportActivity"
+            android:label="Total expense report"
             android:launchMode="singleTask"/>
-        <activity android:name=".Activities.SettingsActivity" android:label="Settings"
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:label="Settings"
             android:launchMode="singleTask"/>
     </application>
 
